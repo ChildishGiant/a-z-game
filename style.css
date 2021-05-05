@@ -1,0 +1,59 @@
+@font-face {
+	font-family: Potta;
+  src: url(Fonts/Potta_One/PottaOne-Regular.ttf);
+}
+
+@font-face {
+	font-family: AlfaSlab;
+  src: url(Fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf);
+}
+
+body {
+	height: 100vh;
+	margin: 0;
+	display: flex;
+  justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	font-family: AlfaSlab, Arial, Helvetica, sans-serif;
+}
+
+#letter {
+	font-family: AlfaSlab, Arial, Helvetica, sans-serif;
+	font-size: 4em;
+	text-transform: capitalize;
+	align-self: center;
+}
+
+#category {
+	font-family: Potta, Arial, Helvetica, sans-serif;
+	font-size: 2em;
+	/* align-self: flex-start; */
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	padding: 1em;
+	background: rgb(233, 232, 209);
+}
+
+#input * {
+	margin: 3px;
+}
+
+#category-modal {
+	background-color: rgba(0, 0, 0, 0.5);
+	width:100%;
+	position: absolute;
+	height: 100%;
+}
+
+.hidden {
+	display: none;
+	pointer-events: none;
+}
+
+h1[for=category-picker] {
+	font-weight: 300;
+}
