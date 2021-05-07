@@ -55,7 +55,10 @@
 			[],
 			["york"],
 			[]
-		]
+		],
+		"summer olympic sports": [["artistic", "archery", "athletics"], ["basketball", "bmx freestyle", "bmx racing", "baseball", "badminton", "boxing", "basque pelota"], ["canoe/kayak (sprint)", "canoe/kayak (slalom)", "cricket", "croquet"], ["diving", "discontinued summer sports"], ["equestrian / dressage", "equestrian / eventing", "equestrian / jumping", "equestrian / vaulting"], ["freestyle wrestling", "fencing", "field hockey", "football", "figure skating"], ["greco-roman wrestling", "golf"], ["handball", "handball / field handball"], ["ice hockey"], ["judo", "jeu de paume"], ["karate"], ["lacrosse"], ["marathon swimming", "mountain biking", "modern pentathlon"], [], [], ["polo"], [], ["road cycling", "rhythmic", "rowing", "rugby sevens", "rugby / rugby union", "rackets", "roque"], ["swimming", "synchronized swimming", "softball", "sailing", "shooting", "skateboarding", "sport climbing", "surfing"], ["track cycling", "trampoline", "table tennis", "taekwondo", "tennis", "triathlon", "tug of war", "total events", "total sports"], [], ["volleyball (beach)", "volleyball (indoor)"], ["water polo", "weightlifting", "water motorsports", "wrestling"], [], [], []],
+		"winter olympic sports": [["alpine skiing"], ["biathlon", "bobsleigh", "biathlon / military patrol"], ["curling", "cross-country skiing"], [], [], ["figure skating", "freestyle skiing"], [], [], ["ice hockey"], [], [], ["luge"], [], ["nordic combined"], [], [], [], [], ["speed skating", "short track speed skating", "ski jumping", "snowboarding", "skeleton"], [], [], [], [], [], [], []],
+		"body parts": [["adrenals", "appendix", "adam\u2019s apple", "arm", "abdomen", "ankle"], ["bladder", "brain", "breast", "buttocks"], ["cheek", "chin", "chest", "clitoris", "calf"], [], ["esophagus", "eyes", "eye", "ear", "elbow"], ["forehead", "fingers", "foot"], ["gallbladder", "groin"], ["heart", "head", "hand", "hip", "heel"], ["intestines"], ["jaw"], ["kidney", "knee"], ["liver", "lung", "leg"], ["mouth"], ["nose", "neck", "navel"], ["ovaries"], ["pancreas", "parathyroids", "pituitary", "prostate", "penis"], [], [], ["spleen", "stomach", "shoulders", "spine", "scrotum"], ["testicles", "thymus", "thyroid", "teeth", "tongue", "throat", "thumb", "thorax", "thigh", "toes"], ["uterus"], ["veins", "vulva"], ["wrist"], [], [], []]
 	},
 
 	"production": {
