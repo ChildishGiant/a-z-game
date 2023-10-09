@@ -7,7 +7,21 @@ mode = "wiki"
 language = "en"
 
 categories = {
-    "cites": "Q515",
+    "capital_cities": """
+    SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel
+WHERE
+{
+  ?country wdt:P31 wd:Q3624078 .
+  #not a former country
+  FILTER NOT EXISTS {?country wdt:P31 wd:Q3024240}
+  #and no an ancient civilisation (needed to exclude ancient Egypt)
+  FILTER NOT EXISTS {?country wdt:P31 wd:Q28171280}
+  OPTIONAL { ?country wdt:P36 ?capital } .
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY ?countryLabel
+""",
     "fruits": [
         "Q1364",  # Fruit - part of a flowering plant
         "Q3314483",  # Fruit - food, edible in the raw state
@@ -17,7 +31,7 @@ categories = {
     "horses": "Q726",
 }
 
-category = "vegetables"
+category = "capital_cities"
 
 # Create an empty list for each letter of the alphabet
 toStore = [
@@ -47,26 +61,37 @@ def send_sparql_query(sparql_query):
 def get_instances(category_id):
     # Should probably only be checking for instances or only subclasses but idk
     # So search for boths
-    sparql_query = """
-    SELECT DISTINCT ?item ?itemLabel WHERE {{
-    SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{0}". }}
-    {{
-    SELECT DISTINCT ?item WHERE {{
-        {{
-        ?item p:P31 ?statement0.
-        ?statement0 (ps:P31/(wdt:P279*)) wd:{1}.
+
+    instance_only = True
+    sparql_query = ""
+
+    if instance_only:
+        sparql_query = """
+        SELECT DISTINCT ?item ?itemLabel
+        WHERE {{
+        ?item wdt:P31 wd:{1}.
+        SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{0}". }}
         }}
-        UNION
+        """.format(language, category_id)
+    else:
+        sparql_query = """
+        SELECT DISTINCT ?item ?itemLabel WHERE {{
+        SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{0}". }}
         {{
-        ?item p:P279 ?statement1.
-        ?statement1 (ps:P279/(wdt:P279*)) wd:{1}.
+        SELECT DISTINCT ?item WHERE {{
+            {{
+            ?item p:P31 ?statement0.
+            ?statement0 (ps:P31/(wdt:P279*)) wd:{1}.
+            }}
+            UNION
+            {{
+            ?item p:P279 ?statement1.
+            ?statement1 (ps:P279/(wdt:P279*)) wd:{1}.
+            }}
+        }}
         }}
     }}
-    }}
-}}
-""".format(
-        language, category_id
-    )
+    """.format(language, category_id)
 
     response = send_sparql_query(sparql_query)
 
@@ -104,13 +129,19 @@ if mode == "wiki":
 
     items = []
 
-    # Due to how the game and wikidata works, sometimes we need multiple categories
-    # if there's only one, put it in a list so we don't treat the string like an array (python moment)
-    if isinstance(categories[category], str):
-        categories[category] = [categories[category]]
+    # If it's not a list and doesn't start with a Q, it's a custom query
+    if not isinstance(categories[category], list) and not categories[category].startswith("Q"):
+        response = send_sparql_query(categories[category])
 
-    for wikidata_category in categories[category]:
-        items = items + get_instances(wikidata_category)
+        items = response["results"]["bindings"]
+    else:
+        # Due to how the game and wikidata works, sometimes we need multiple categories
+        # if there's only one, put it in a list so we don't treat the string like an array (python moment)
+        if isinstance(categories[category], str):
+            categories[category] = [categories[category]]
+
+        for wikidata_category in categories[category]:
+            items = items + get_instances(wikidata_category)
 
     things = []
 
