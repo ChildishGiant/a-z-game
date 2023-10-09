@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Categories</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="main.js"></script>
+</head>
+<body>
+
+	<div id="category-backdrop">
+
+		<div id="pickers">
+
+			<h1 for="category-picker">Pick a category</h1>
+			<select name="category-picker" id="category-picker"></select>
+
+			<h2>Options:</h2>
+			<div id="options">
+				<label for="auto-guess">Auto guess</label>
+				<input type="checkbox" id="auto-guess" checked>
+			</div>
+
+			<button onclick="load(document.getElementById('category-picker').value)">Start</button>
+
+		</div>
+	</div>
+
+	<div id="category"></div>
+	<div class="card">
+		<div id="letter">a</div>
+
+		<div id="input">
+			<input type="text" id="guess">
+			<button onclick="makeGuess">Guess</button>
+		</div>
+		<button onclick="increment(false)">Move on</button>
+	</div>
+
+</body>
+</html>

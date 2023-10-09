@@ -42,7 +42,7 @@ body {
 	margin: 3px;
 }
 
-#category-modal {
+#category-backdrop {
 	background-color: rgba(0, 0, 0, 0.5);
 	width:100%;
 	position: absolute;
@@ -56,4 +56,16 @@ body {
 
 h1[for=category-picker] {
 	font-weight: 300;
+}
+
+#pickers {
+	display: inline-grid;
+	padding: 1em;
+	background: white;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
 }

@@ -1,0 +1,17 @@
+{
+  "name": "a-z-game",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node esbuild.config.mjs -w",
+    "build": "node esbuild.config.mjs"
+  },
+  "keywords": [],
+  "author": "Allie Law (ChildishGiant)",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "esbuild": "^0.19.4",
+    "esbuild-serve": "^1.0.1"
+  }
+}
