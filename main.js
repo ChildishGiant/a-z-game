@@ -8,7 +8,7 @@ const letters = 'abcdefghijklmnopqrstuvwxyz'
 let score = 0
 
 let options = {
-  autoGuess: false
+  autoGuess: true
 }
 
 window.onload = function () {
@@ -24,11 +24,21 @@ window.onload = function () {
     picker.appendChild(select)
   }
 
+  // Make sure state is matched
+  document.getElementById("auto-guess").checked = options.autoGuess
+
   // Bind things
-  document.getElementById("guess").onkeydown = guessDown
-  document.getElementById("auto-guess").onclick = (() => {
+  document.getElementById("guess").addEventListener("keydown", (() => {
+    if (event.key === 'Enter') makeGuess()
+  }))
+
+  document.getElementById("guess").addEventListener("input", (() => {
+    if (options.autoGuess) makeGuess()
+  }))
+
+  document.getElementById("auto-guess").addEventListener("click", (() => {
     options.autoGuess = !options.autoGuess
-  })
+  }))
 }
 
 // Takes a category name and requests and loads that json
@@ -53,25 +63,15 @@ window.load = function (category) {
       currentCategory = data
       console.log(data)
     })
+
   document.getElementById('category').innerText = category
   document.getElementById('category-backdrop').classList.toggle('hidden')
 }
-
-window.guessDown = function (event) {
-  console.log(event)
-  if (event.key === 'Enter') makeGuess()
-
-  if (options.autoGuess) {
-    makeGuess()
-  }
-}
-
 
 function reset () {
   currentLetter = 0
   score = 0
 }
-
 
 /**
  * Last letter was guessed, so the game is over
@@ -80,7 +80,6 @@ function finish () {
   window.alert('win' + score)
   reset()
 }
-
 
 /**
  *
@@ -95,6 +94,9 @@ function increment (earned) {
   } else {
     // Move on one category
     currentLetter++
+
+    // Clear the input
+    document.getElementById('guess').value = ''
 
     // Make sure the next category have valid guesses
     while (currentCategory[currentLetter].length === 0) {
@@ -113,17 +115,17 @@ function increment (earned) {
   document.getElementById('letter').innerHTML = letters[currentLetter]
 }
 
+// Think this is a really outdated way of doing it
+// But it works so I'm not gonna change it
 window.increment = increment
 
 function makeGuess (autoGuess) {
-  // Store guess
+  // Store guess in const
   const guess = document.getElementById('guess').value.toLowerCase()
 
   // Test if guess is right
   if (currentCategory[currentLetter].indexOf(guess) !== -1) {
     increment(true)
-    // Clear the input
-    document.getElementById('guess').value = ''
   }
 }
 window.makeGuess = makeGuess
