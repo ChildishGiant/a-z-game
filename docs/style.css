@@ -1,11 +1,11 @@
 @font-face {
 	font-family: Potta;
-  src: url(Fonts/Potta_One/PottaOne-Regular.ttf);
+  src: url(fonts/Potta_One/PottaOne-Regular.ttf);
 }
 
 @font-face {
 	font-family: AlfaSlab;
-  src: url(Fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf);
+  src: url(fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf);
 }
 
 body {
