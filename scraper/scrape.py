@@ -23,7 +23,7 @@ WHERE
 ORDER BY ?countryLabel
 """,
     "fruits": [
-        "Q1364",  # Fruit - part of a flowering plant
+        "Q1364",  # Fruit - part of a flowering plant - This includes rice but without it there's no apple etc
         "Q3314483",  # Fruit - food, edible in the raw state
     ],
     "vegetables": "Q11004",
@@ -31,7 +31,7 @@ ORDER BY ?countryLabel
     "horses": "Q726",
 }
 
-category = "capital_cities"
+category = "fruits"
 
 # Create an empty list for each letter of the alphabet
 toStore = [

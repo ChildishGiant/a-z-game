@@ -2,10 +2,11 @@ const categories = require('./categories.json')
 
 const categoryNames = categories
 
-
 let currentCategory = []
 const letters = 'abcdefghijklmnopqrstuvwxyz'
 let score = 0
+let currentLetter = 0
+let startTime = new Date()
 
 let options = {
   autoGuess: true
@@ -43,8 +44,9 @@ window.onload = function () {
 
 // Takes a category name and requests and loads that json
 window.download_category = async function (category) {
+  console.log('Downloading category: ' + category)
   try {
-    const response = await fetch(category + '.json');
+    const response = await fetch("categories/" + category + '.json');
     const data = await response.json();
     return data;
   } catch (error) {
@@ -53,32 +55,37 @@ window.download_category = async function (category) {
   }
 }
 
-window.load = function (category) {
-
-  currentLetter = 0
-  score = 0
-
-  download_category(category)
-    .then(data => {
-      currentCategory = data
-      console.log(data)
-    })
-
-  document.getElementById('category').innerText = category
-  document.getElementById('category-backdrop').classList.toggle('hidden')
-}
-
 function reset () {
   currentLetter = 0
   score = 0
+}
+
+window.load = function (category) {
+  // reset()
+
+  download_category(category)
+  .then(data => {
+    currentCategory = data
+    console.log(data)
+  })
+  // Could cache but that'd only useful if you're playing the same category multiple times
+  // So I'm not gonna bother
+  startTime = new Date()
+
+  document.getElementById('category').innerText = category
+  document.getElementById('category-backdrop').classList.toggle('hidden')
 }
 
 /**
  * Last letter was guessed, so the game is over
  */
 function finish () {
-  window.alert('win' + score)
+  let endTime = new Date()
+  let timeDiff = endTime - startTime
+  window.alert('You did it! You scored ' + score + ' points! \n It took you ' + timeDiff / 1000 + ' seconds!')
   reset()
+  // Show the category picker again
+  document.getElementById('category-backdrop').classList.remove('hidden')
 }
 
 /**
